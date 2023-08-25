@@ -24,3 +24,7 @@ Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi)
 Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
 ## Svolgimento
+
+1. Recupero gli elementi di interesse
+2. stampo nel dom gli oggetti usando forEach
+3. class attiva toggle
