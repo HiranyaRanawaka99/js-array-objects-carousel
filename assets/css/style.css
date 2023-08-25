@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    height: 100vh;
+}
+
+.slider-container {
+    width: 80%;
+    height: 80%;
+}
+
+img {
+    width: 100%;
+}
