@@ -30,31 +30,86 @@ const images = [
 
 //Recupero gli elementi di interesse
 const slidesContainer = document.getElementById('slides-container');
-const prevButton = document.getElementById('go-prev');
-const nextButton = document.getElementById('go-next');
+const thumbsnailsContainer = document.getElementById('thumbnails.container"')
+
+//dichiaro la slide attiva
+let activeSlide = 0;
 
 //Aggiungo dinamicamente le slide al container
-
-images.forEach((oneSlide, i) => {
-  //console.log(`${oneSlide.image}${oneSlide.title}${oneSlide.text}`);
-
-  //Dichiaro la classe attiva
-  let currentImg = 0;
-    //se è la prima slide sarà active = si vedrà solo la prima slide
-  if (oneSlide == 0 ) {
-    currentImg = 'active';
-  }
-
+images.forEach((slide, index) => {
+  
+  //Aggiungo un nodo HTML e lo formatto
+  const slideElement = document.createElement('div'); //creo un nodo per sfruttare l'aggiunta dell'attrbuto
+  slideElement.classList.add('slide');
+  
+  //Se l'indice è = alla activeSlide aggiungi la classe active
+  if (index === activeSlide) slideElement.classList.add('active');
+  
   //stampo nel dom
-  slidesContainer.innerHTML += `
-    <div class="slides ${currentImg}">
-      <img src='./${oneSlide.image}'>
-      <div class="info"> 
-        <h5>${oneSlide.title} </h5>
-        <p>${oneSlide.text} </p>    
-    </div>
+  slideElement.innerHTML = `
+  <div class="slide">
+  <img src='assets/${slide.image}'>
+  <div class="info"> 
+  <h5>${slide.title} </h5>
+  <p>${slide.text} </p>    
+  </div>
   `
-});
+  //aggiungo il nodo all'array di oggetti
+  slide.HTMLnode = slideElement;
+  
+  //aggiungo il nodo al container
+  slidesContainer.append(slideElement);
+  
+  //
+  const thumbsnailElement = document.createElement('div');
+  thumbsnailElement.classList.add('thumb');
+  thumbsnailElement.innerHTML = `<img src='assets/${slide.image}'> `;
+  thumbsnailElement.setAttribute('data-index', index);
+  thumbsnailElement.addEventListener('click', function () {
+    console.log(this);
+    
+  })
+})
+
+//Reupero i buttons
+const prevButton = document.getElementById('go-prev');
+prevButton.addEventListener('click', goPrev);
 
 
+const nextButton = document.getElementById('go-next');
+nextButton.addEventListener('click', goNext);
 
+  function goNext() {
+    //rimuovere  la classe active
+    const oldSlide = images[activeSlide].HTMLnode;
+    oldSlide.classList.remove('active');
+
+    //incremento
+    activeSlide++;
+
+    //se activeSlide sfora, devo resettarlo
+    if (newSlideSlide >= images.length) activeSlide = 0;
+
+    //aggiungere la classe active
+    const newSlide = images[activeSlide].HTMLnode;
+    newSlide.classList.add('active');
+  }
+  goNext();
+
+  //Funzione per tornare in dietro
+  function goPrev()  {
+
+    //rimuovere la classe active
+    const oldSlide = images[activeSlide].HTMLnode;
+    oldSlide.classList.remove('active');
+
+    //decremento
+    activeSlide--;
+
+    //se activeSlide sfora, devo resettarlo
+    if (oldSlide < 0) activeSlide = images.length - 1;
+
+    //aggiungere la classe active
+    const newSlide = images[activeSlide].HTMLnode;
+    newSlide.classList.add('active');
+}
