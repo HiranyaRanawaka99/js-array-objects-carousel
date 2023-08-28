@@ -11,8 +11,12 @@ body {
 
 .wrapper {
     margin: 0 auto;
-
     width: 50%;
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
 }
 
 .main-container {
@@ -50,11 +54,24 @@ body {
 
 .thumb {
     border: 1px solid white;
-
-    
 }
 
 .thumb > img {
     max-width: 100%;
 }
 
+.arrow-up{
+    position: absolute;
+
+    top: 1rem;
+    right: 3.5rem;
+
+    border-radius: 50%;
+}
+
+.arrow-down{
+    position: absolute;
+
+    bottom: 1rem;
+    right: 3.5rem;
+}
