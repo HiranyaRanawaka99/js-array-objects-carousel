@@ -38,6 +38,7 @@ let activeSlide = 0;
 //Aggiungo dinamicamente le slide al container
 images.forEach((slide, index) => {
   
+  //GENERO SLIDE
   //Aggiungo un nodo HTML e lo formatto
   const slideElement = document.createElement('div'); //creo un nodo per sfruttare l'aggiunta dell'attrbuto
   slideElement.classList.add('slide');
@@ -58,6 +59,29 @@ images.forEach((slide, index) => {
 
   //aggiungo il nodo al container
   slidesContainer.append(slideElement);
+
+
+  //GENERO THUMBNAILS 
+  //creo un nodo e appendo nel dom
+  const thumbnailsElement = document.createElement('div');
+  thumbnailsElement.classList.add('thumb');
+  thumbnailsElement.innerHTML = `<img src="assets/${slide.image}">`;
+
+  //set un attributo indice per sapere su quale immagine sto cliccando
+  thumbnailsElement.setAttribute('data-index', index);
+
+  //click sulle immagini, stampa in console il suo indice
+  thumbnailsElement.addEventListener('click', function () {
+    // const index = this.getAttribute('data-index');
+    // console.log(index);
+
+    //cambia le immagini al click
+    goToSlide(this.getAttribute('data-index'));
+
+    })
+
+  thumbsnailsContainer.append(thumbnailsElement);
+
 });
 
 //Reupero i buttons
@@ -106,3 +130,16 @@ function goPrev()  {
 
 }
 goPrev();
+
+let index = 0;
+//Funzione
+function goToSlide(index) {
+  const oldSlide = images[activeSlide].HTMLnode;
+  oldSlide.classList.remove('active');
+
+  activeSlide = index;
+
+  const newSlide = images[activeSlide].HTMLnode;
+  newSlide.classList.add('active');
+}
+goToSlide(index);

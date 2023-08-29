@@ -25,6 +25,8 @@ Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
 ## Svolgimento
 
-1. Recupero gli elementi di interesse
-2. stampo nel dom gli oggetti usando forEach
-3. class attiva toggle
+### BONUS 1
+
+1. se clicco sull'immagine stampo nel console.log il suo indice
+
+if addeventListner
