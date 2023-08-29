@@ -1,32 +1,32 @@
 //Array di oggetti
 
 const images = [
-    {
-      image: 'img/01.webp',
-      title: "Marvel's Spiderman Miles Morale",
-      text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
-    },
-    {
-      image: 'img/02.webp',
-      title: 'Ratchet & Clank: Rift Apart',
-      text: 'Go dimension-hopping with Ratchet and Clank as they take on an evil emperor from another reality.',
-    },
-    {
-      image: 'img/03.webp',
-      title: 'Fortnite',
-      text: 'Grab all of your friends and drop into Epic Games Fortnite, a massive 100 - player face - off that combines looting, crafting, shootouts and chaos.',
-    },
-    {
-      image: 'img/04.webp',
-      title: 'Stray',
-      text: 'Lost, injured and alone, a stray cat must untangle an ancient mystery to escape a long-forgotten city',
-    },
-    {
-      image: 'img/05.webp',
-      title: "Marvel's Avengers",
-      text: "Marvel's Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.",
-    },
-  ];
+  {
+    image: 'img/01.webp',
+    title: "Marvel's Spiderman Miles Morale",
+    text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
+  },
+  {
+    image: 'img/02.webp',
+    title: 'Ratchet & Clank: Rift Apart',
+    text: 'Go dimension-hopping with Ratchet and Clank as they take on an evil emperor from another reality.',
+  },
+  {
+    image: 'img/03.webp',
+    title: 'Fortnite',
+    text: 'Grab all of your friends and drop into Epic Games Fortnite, a massive 100 - player face - off that combines looting, crafting, shootouts and chaos.',
+  },
+  {
+    image: 'img/04.webp',
+    title: 'Stray',
+    text: 'Lost, injured and alone, a stray cat must untangle an ancient mystery to escape a long-forgotten city',
+  },
+  {
+    image: 'img/05.webp',
+    title: "Marvel's Avengers",
+    text: "Marvel's Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.",
+  },
+];
 
 //Recupero gli elementi di interesse
 const slidesContainer = document.getElementById('slides-container');
@@ -42,10 +42,10 @@ images.forEach((slide, index) => {
   //Aggiungo un nodo HTML e lo formatto
   const slideElement = document.createElement('div'); //creo un nodo per sfruttare l'aggiunta dell'attrbuto
   slideElement.classList.add('slide');
-  
+
   //Se l'indice è = alla activeSlide aggiungi la classe active
   if (index == activeSlide) slideElement.classList.add('active');
-  
+
   //stampo nel dom
   slideElement.innerHTML = `
     <img src='assets/${slide.image}'>
@@ -76,7 +76,7 @@ images.forEach((slide, index) => {
     //cambia le immagini al click
     goToSlide(this.getAttribute('data-index'));
 
-    })
+  })
 
   thumbsnailsContainer.append(thumbnailsElement);
 
@@ -84,55 +84,83 @@ images.forEach((slide, index) => {
 
 //Reupero i buttons
 const nextButton = document.getElementById('go-next');
+const prevButton = document.getElementById('go-prev');
 
+const playRightButton = document.getElementById('playR');
+const playLeftButton = document.getElementById('playL');
+const play = document.getElementById('play');
+const stop = document.getElementById('stop');
+
+
+//Al click vado avanti o indietro
 nextButton.addEventListener('click', goNext);
+prevButton.addEventListener('click', goPrev);
 
+
+//FUNZIONE PER ANDARE AVANTI
 function goNext() {
 
-  //play ogni 3 secondi
-  setInterval (function () {
-  
-    //rimuovere  la classe active
-    const oldSlide = images[activeSlide].HTMLnode;
-    oldSlide.classList.remove('active');
-    
-    //incremento
-    activeSlide++;
-    
-    //se activeSlide sfora, devo resettarlo
-    if (activeSlide >= images.length) activeSlide = 0;
-    
-    //aggiungere la classe active
-    const newSlide = images[activeSlide].HTMLnode;
-    newSlide.classList.add('active');
-    
-  }, 3000)
-}
+  //solo se clicco fatto play a destra
+  playRightButton.addEventListener('click', function () {
+
+    //play ogni 3 secondi
+    const play = setInterval(function () {
+
+      //rimuovere  la classe active
+      const oldSlide = images[activeSlide].HTMLnode;
+      oldSlide.classList.remove('active');
+
+      //incremento
+      activeSlide++;
+
+      //se activeSlide sfora, devo resettarlo
+      if (activeSlide >= images.length) activeSlide = 0;
+
+      //aggiungere la classe active
+      const newSlide = images[activeSlide].HTMLnode;
+      newSlide.classList.add('active');
+
+      //se clicco su stop, interrompi l'autoplay
+      stop.addEventListener('click', function () {
+        clearInterval(play)
+      })
+
+    }, 3000);
+  });
+};
 
 goNext();
 
-const prevButton = document.getElementById('go-prev');
-prevButton.addEventListener('click', goPrev);
+//FUNZIONE PER TORNARE INDIETRO
+function goPrev() {
 
-//Funzione per tornare in dietro
-function goPrev()  {
+  //solo se clicco fatto play a destra
+  playLeftButton.addEventListener('click', function () {
 
-  //rimuovere la classe active
-  const oldSlide = images[activeSlide].HTMLnode;
-  oldSlide.classList.remove('active');
+    //play ogni 3 secondi
+    const play = setInterval(function () {
 
-  //decremento
-  activeSlide--;
-  
-  //se activeSlide sfora, devo resettarlo
-  if (activeSlide < 0) activeSlide = images.length - 1;
+      //rimuovere la classe active
+      const oldSlide = images[activeSlide].HTMLnode;
+      oldSlide.classList.remove('active');
 
+      //decremento
+      activeSlide--;
 
-  //aggiungere la classe active
-  const newSlide = images[activeSlide].HTMLnode;
-  newSlide.classList.add('active');
+      //se activeSlide sfora, devo resettarlo
+      if (activeSlide < 0) activeSlide = images.length - 1;
 
-}
+      //aggiungere la classe active
+      const newSlide = images[activeSlide].HTMLnode;
+      newSlide.classList.add('active');
+
+       //se clicco su stop, interrompi l'autoplay
+       stop.addEventListener('click', function () {
+        clearInterval(play)
+      })
+    }, 3000);
+  });
+};
 goPrev();
 
 let index = 0;

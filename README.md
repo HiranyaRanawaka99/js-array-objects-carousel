@@ -22,3 +22,13 @@ Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l'immagi
 Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l'immagine attiva dovrà cambiare alla successiva.
 ##### BONUS 3:
 Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
+
+
+1. bottone start e stop dentro l'intervallo 
+ 
+ - solo se clicco start fa autoplay
+ - se clicco stop clearInterval, autoplay smette
+
+2. bottone di inversione
+
+- se 
