@@ -37,7 +37,7 @@ let activeSlide = 0;
 
 //Aggiungo dinamicamente le slide al container
 images.forEach((slide, index) => {
-  
+
   //GENERO SLIDE
   //Aggiungo un nodo HTML e lo formatto
   const slideElement = document.createElement('div'); //creo un nodo per sfruttare l'aggiunta dell'attrbuto
@@ -59,8 +59,6 @@ images.forEach((slide, index) => {
 
   //aggiungo il nodo al container
   slidesContainer.append(slideElement);
-
-
   //GENERO THUMBNAILS 
   //creo un nodo e appendo nel dom
   const thumbnailsElement = document.createElement('div');
@@ -90,21 +88,27 @@ const nextButton = document.getElementById('go-next');
 nextButton.addEventListener('click', goNext);
 
 function goNext() {
-  //rimuovere  la classe active
-  const oldSlide = images[activeSlide].HTMLnode;
-  oldSlide.classList.remove('active');
-  
-  //incremento
-  activeSlide++;
 
-  //se activeSlide sfora, devo resettarlo
-  if (activeSlide >= images.length) activeSlide = 0;
+  //play ogni 3 secondi
+  setInterval (function () {
   
-  //aggiungere la classe active
-  const newSlide = images[activeSlide].HTMLnode;
-  newSlide.classList.add('active');
-  
+    //rimuovere  la classe active
+    const oldSlide = images[activeSlide].HTMLnode;
+    oldSlide.classList.remove('active');
+    
+    //incremento
+    activeSlide++;
+    
+    //se activeSlide sfora, devo resettarlo
+    if (activeSlide >= images.length) activeSlide = 0;
+    
+    //aggiungere la classe active
+    const newSlide = images[activeSlide].HTMLnode;
+    newSlide.classList.add('active');
+    
+  }, 3000)
 }
+
 goNext();
 
 const prevButton = document.getElementById('go-prev');
